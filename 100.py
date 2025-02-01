@@ -86,45 +86,7 @@ options.add_argument("--blink-settings=imagesEnabled=false")
 
 #数据库保存用户信息.json 保存.     用户名--->data
 
-''' # 密码保存md5加密后的.
-#  zhangsan--->{
-    "用户名":"zhangsan"
-    "密码md5":"234kjcx79#xcilz"
-    "订阅的频道":[
-                  "youtube 中国人",
-                  "youtube 看天下",
-                  "bilibili 看狗",
-    ],
-    "收藏夹":[ 收藏文件的索引(2,3)                     
-          ]
-    }
-    
-    所有人的收藏夹---->[
-       收藏1,
-       收藏2
-       收藏3...
-    ]
-'''
-shoucang=[]
-data_base={
-  "zhangsan":{
-    "用户名":"zhangsan",
-    "密码md5":"111",
-    "订阅的频道":[
-                  "youtube 中国人",
-                  "youtube 看天下",
-                  "bilibili 看狗",
-    ],
-    "收藏夹":[ 2,3                 
-          ]
-    },
-    "已阅读":set(
-      ['aaa','bbb']
-    )
-  
 
-  
-}
 
 
 
@@ -143,6 +105,9 @@ aaaaa=time.time()
 if 1:
     print('开始爬虫.')
     url='https://www.amazon.co.jp/gp/product/B0BSLJ52ZF?&linkCode=sl1&tag=twm1a4080-22&linkId=387fac7c4d0581478539f94f3afea1ff&language=ja_JP&ref_=as_li_ss_tl'
+    
+    # url='https://www.amazon.co.jp/-/zh/dp/B07911QK3X?ref_=Oct_d_otopr_d_2151901051_0&pd_rd_w=0XfJ9&content-id=amzn1.sym.1374e2a8-edae-438c-991f-c31a30021de9&pf_rd_p=1374e2a8-edae-438c-991f-c31a30021de9&pf_rd_r=8AQ8MEZB9SHYAS2DP192&pd_rd_wg=zVqZ5&pd_rd_r=fbb4971a-befc-4785-993d-0c1584e21996&pd_rd_i=B07911QK3X'
+    
     # url='https://www.baidu.com'
 #     cookie='session-id=358-1808349-2151563; session-id-time=2082787201l; i18n-prefs=JPY; skin=noskin; ubid-acbjp=356-2093933-0778857; lc-acbjp=zh_CN; session-token="VNXhjIlj3QO9MDcQQBTqCExCdVOgyLGUACAFc6mI9VX6XBOl1bLrjQ5nY58BEleQL0+AqKk9kWnUaTPSUKxHBkre7kTQUz9BR4PIuzCnoSSUwy7pni3dU/j9+m6WzMuRHjIrT99CUYIYP5V6zXHfSUysyOBXUmnCCs34C8kOUiPDDbSs0EAT0aLycJQ0UPCL3dtWGSsREFrpkc+E4KE1UwIalMCpo4Q2HwnD2334++7GWvGZyGRlG0XO35KpR0LAO/75V1WKSlwjaraEyingpkKGmXXSkJKhzeV9cm8tLyd/awEdH4zXQiIIE8C4vLsufYHvmoTuDxhI1mtGIbTk2nNDKlvHn/mEcRVq+tgIjFg="
 # '
@@ -183,10 +148,15 @@ if 1:
       #     f.write(driver.page_source)
       # driver.close()
       # a=driver.find_element(By.XPATH,'//div[@class="a-section a-spacing-none a-padding-none"]').text
-      a=driver.find_element(By.XPATH,'//div[@id="mir-layout-DELIVERY_BLOCK-slot-PRIMARY_DELIVERY_MESSAGE_LARGE"]').text
+      a=''
+      try:
+        a=driver.find_element(By.XPATH,'//span[@class="a-size-medium a-color-success"]').text
+      except:
+        pass
       print("结果是",a)
       print('使用时间',time.time()-aaaaa)
-      time.sleep(10)
+      import random
+      time.sleep(5+random.random()*2)
     
 
     
