@@ -78,7 +78,7 @@ options = webdriver.ChromeOptions()
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--ignore-ssl-errors')
 options.add_argument('--disable-gpu')  # 禁用GPU加速
-options.add_argument('--headless')
+# options.add_argument('--headless')
 options.add_argument("--blink-settings=imagesEnabled=false")
 # 初始化 WebDriver
 
@@ -171,66 +171,24 @@ if 1:
   # 'path': '/',
   #   'expiry': None  # 可以设置过期时间
 })
+    #========循环体.
+    while 1:
+      import time
+      # driver.get('https://www.amazon.co.jp')
+      aaaaa=time.time()
+      driver.get(url)
+      # time.sleep(150) # 查看效果
+      # if 1: 
+      #   with open('debug.html' , 'w',encoding='utf-8') as f:
+      #     f.write(driver.page_source)
+      # driver.close()
+      # a=driver.find_element(By.XPATH,'//div[@class="a-section a-spacing-none a-padding-none"]').text
+      a=driver.find_element(By.XPATH,'//div[@id="mir-layout-DELIVERY_BLOCK-slot-PRIMARY_DELIVERY_MESSAGE_LARGE"]').text
+      print("结果是",a)
+      print('使用时间',time.time()-aaaaa)
+      time.sleep(10)
+    
 
-    import time
-    # driver.get('https://www.amazon.co.jp')
-    driver.get(url)
-    # time.sleep(150) # 查看效果
-    if 1: 
-      with open('debug.html' , 'w',encoding='utf-8') as f:
-        f.write(driver.page_source)
-    # driver.close()
-    # a=driver.find_element(By.XPATH,'//div[@class="a-section a-spacing-none a-padding-none"]').text
-    a=driver.find_element(By.XPATH,'//div[@id="mir-layout-DELIVERY_BLOCK-slot-PRIMARY_DELIVERY_MESSAGE_LARGE"]').text
-    print("结果是",a)
-    print('使用时间',time.time()-aaaaa)
     
     raise
-    # print(driver.page_source)
-    a=[i for i in driver.find_elements(By.XPATH,'//*[@jsname="UWckNb"]')]
     
-    def guolv (a):
-       print('过滤之前的名字',a)
-       if 'https://www.youtube.com/@' in a:
-        a=a.replace('https://www.youtube.com/@','')
-        if '/' in a:
-          a=a[:a.index('/')]
-        if '?' in a:
-          a=a[:a.index('?')]
-          pass
-        if '%' in a:
-          return ''
-        return a
-       else:
-         return ''
-    out=[]
-    for i in a:
-       #=====每一个元素解析
-       yuansu={}
-       yuansu['name']=i.find_element(By.XPATH, './/*[@class="LC20lb MBeuO DKV0Md"]').text
-       yuansu['uid']=guolv(i.get_attribute("href"))
-       try:
-         yuansu['pic']=i.find_element(By.XPATH,'../../../../..//img').get_attribute('src')
-       except:
-         yuansu['pic']=''
-       out.append(yuansu)
-       pass
-
-
-
-
-
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
