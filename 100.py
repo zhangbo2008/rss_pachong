@@ -159,6 +159,6 @@ if 1:
       time.sleep(5+random.random()*2)
     
 
-    
+    # 经过测试,不建议用pywright, 他里面的cookie设置的更麻烦, 并且感觉更容易失效.
     raise
     
