@@ -9,8 +9,11 @@ https://www.amazon.co.jp/dp/B0DT6Q3BXM?th=1&psc=1&m=AN1VRQENFRJN5&tag=twm1abf-22
 
 
 '''
-
-
+try:
+  from notify import send
+except:
+  pass
+  pass
 
 url='https://www.amazon.co.jp/dp/B0DTSN2K86?th=1&psc=1&m=AN1VRQENFRJN5&tag=twm1abf-22&linkCode=ogi'
 
@@ -44,10 +47,6 @@ import re
 import os
 import io
 import json
-from flask import Flask, jsonify, request, render_template
-from flask_cors import CORS
-app = Flask(__name__)
-CORS(app)  # 解决跨域问题
 
 import requests
 from bs4 import BeautifulSoup
@@ -78,7 +77,11 @@ options = webdriver.ChromeOptions()
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--ignore-ssl-errors')
 options.add_argument('--disable-gpu')  # 禁用GPU加速
-# options.add_argument('--headless')
+options.add_argument('--headless')
+# options.add_argument('--user-data-dir')
+options.add_argument("--no-sandbox") 
+options.add_argument('--disable-dev-shm-usage')
+
 options.add_argument("--blink-settings=imagesEnabled=false")
 # 初始化 WebDriver
 
@@ -114,7 +117,7 @@ if 1:
 
 
 
-    from webdriver_manager.chrome import ChromeDriverManager
+
 
     # driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
     driver = webdriver.Chrome(options=options)
@@ -152,8 +155,17 @@ if 1:
       try:
         a=driver.find_element(By.XPATH,'//span[@class="a-size-medium a-color-success"]').text
         if '有货' in a:
+            name='5090'
            # send
-           pass
+            send(
+                        title='Rakuten 发现目标商品！',
+                        content=f'''商品名: {name}  
+商品链接: [点击购买]({url})
+
+---
+原始链接: {url}'''
+                    )
+            pass
       except:
         pass
       print("结果是",a)
